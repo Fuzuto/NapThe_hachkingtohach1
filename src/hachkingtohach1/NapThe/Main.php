@@ -30,6 +30,7 @@ class Main extends PluginBase {
 		if ($command->getName() == "napthe") {
 			$form = new CustomForm(function (Player $sender, $data) {
 				// TODO: Check $data
+				if(isset($data[0]) && $data[0] !== null) {
 				$this->getServer()->getAsyncPool()->submitTask(new ChargingTask(
 					telco: Partner::TELCO[$data[0]],
 					code: $data[3],
@@ -37,6 +38,7 @@ class Main extends PluginBase {
 					amount: (int) Partner::AMOUNT[$data[1]],
 					playerName: $sender->getName()
 				));
+			}
 			});
 			$form->setTitle(title: "Biểu Mẫu Nạp Thẻ");
 			$form->addDropdown(text: "Loại thẻ:", options: Partner::TELCO);
